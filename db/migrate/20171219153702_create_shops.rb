@@ -7,7 +7,7 @@ class CreateShops < ActiveRecord::Migration[5.1]
       t.decimal :longitude, :precision => 17, :scale => 14
       t.string :address
       t.string :city
-      t.integer :zip
+      t.string :zip
       t.string :phone
       t.string :country_code
 

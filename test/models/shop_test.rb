@@ -46,11 +46,11 @@ class ShopTest < ActiveSupport::TestCase
     assert_not_nil @shop.errors[:city], 'no validation error for city present'
   end
 
-  test 'should have unique name' do
-    shop2 = Shop.new(chain: 'Shopmium', name: 'Shopmium Poissy', latitude: '48.92820769999999' , longitude: '2.0446661', address: '119 rue du General de Gaulle', city: 'Poissy')
-    shop2.valid?
-    assert_not_nil shop2.errors[:name], 'no validation error for unique name'
-  end
+  # test 'should have unique name' do
+  #   shop2 = Shop.new(chain: 'Shopmium', name: 'Shopmium Poissy', latitude: '48.92820769999999' , longitude: '2.0446661', address: '119 rue du General de Gaulle', city: 'Poissy')
+  #   shop2.valid?
+  #   assert_not_nil shop2.errors[:name], 'no validation error for unique name'
+  # end
 
   test 'latitude should be between -90 and 90' do
     @shop.latitude = -120

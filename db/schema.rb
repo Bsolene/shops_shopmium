@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171219153702) do
     t.decimal "longitude", precision: 17, scale: 14
     t.string "address"
     t.string "city"
-    t.integer "zip"
+    t.string "zip"
     t.string "phone"
     t.string "country_code"
     t.datetime "created_at", null: false
