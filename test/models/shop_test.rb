@@ -22,17 +22,17 @@ class ShopTest < ActiveSupport::TestCase
     assert_not_nil @shop.errors[:name], 'no validation error for name present'
   end
 
-  test 'invalid without latitude' do
-    @shop.latitude = nil
-    refute @shop.valid?, 'shop is valid without a latitude'
-    assert_not_nil @shop.errors[:latitude], 'no validation error for latitude present'
-  end
+  # test 'invalid without latitude' do
+  #   @shop.latitude = nil
+  #   refute @shop.valid?, 'shop is valid without a latitude'
+  #   assert_not_nil @shop.errors[:latitude], 'no validation error for latitude present'
+  # end
 
-  test 'invalid without longitude' do
-    @shop.longitude = nil
-    refute @shop.valid?, 'shop is valid without a longitude'
-    assert_not_nil @shop.errors[:longitude], 'no validation error for longitude present'
-  end
+  # test 'invalid without longitude' do
+  #   @shop.longitude = nil
+  #   refute @shop.valid?, 'shop is valid without a longitude'
+  #   assert_not_nil @shop.errors[:longitude], 'no validation error for longitude present'
+  # end
 
   test 'invalid without address' do
     @shop.address = nil

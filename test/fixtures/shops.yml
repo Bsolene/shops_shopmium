@@ -11,3 +11,13 @@ valid:
   phone: 0130068308
   country_code: fr
 
+one:
+  chain: Shopmium
+  name: Shopmium Poissy
+  latitude: 48.92820769999999
+  longitude: 2.0446661
+  address: 119 rue du General de Gaulle
+  city: Poissy
+  zip: 78300
+  phone: 0130068308
+  country_code: fr

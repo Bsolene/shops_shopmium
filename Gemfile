@@ -15,6 +15,9 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem "geocoder"
+gem 'gmaps4rails'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -26,4 +29,6 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rails-controller-testing'
+
 end
