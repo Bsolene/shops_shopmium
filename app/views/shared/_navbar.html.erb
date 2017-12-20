@@ -1,0 +1,15 @@
+<div class="navbar-shopmium">
+
+    <%= link_to 'Home', shops_path, class: 'navbar-shopmium-item navbar-shopmium-link' %>
+
+
+    <%= form_tag shops_path, method: :get, class: "navbar-shopmium-search text-center" do %>
+      <%= text_field_tag :query, params[:query], class: "navbar-shopmium-search-input", placeholder: "search for a shop" %>
+      <button type="submit" class="navbar-shopmium-search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    <% end %>
+
+    <%= link_to 'Ajouter un shop', new_shop_path, class: 'navbar-shopmium-item navbar-shopmium-link' %>
+
+</div>

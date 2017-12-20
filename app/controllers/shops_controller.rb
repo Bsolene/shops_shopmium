@@ -4,17 +4,37 @@ class ShopsController < ApplicationController
 
 
   def index
-    @shops = Shop.where.not(latitude: nil, longitude: nil)
 
-    @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
-        marker.lat shop.latitude
-        marker.lng shop.longitude
-        marker.infowindow render_to_string(partial: "/shops/map_box", locals: { shop: shop })
+    if params[:query].present?
+      sql_query = "name ILIKE :query OR city ILIKE :query"
+      @shops = Shop.where(sql_query, query: "%#{params[:query]}%")
+
+      @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
+          marker.lat shop.latitude
+          marker.lng shop.longitude
+          marker.infowindow render_to_string(partial: "/shops/map_box", locals: { shop: shop })
+      end
+
+    else
+
+      @shops = Shop.where.not(latitude: nil, longitude: nil)
+
+      @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
+          marker.lat shop.latitude
+          marker.lng shop.longitude
+          marker.infowindow render_to_string(partial: "/shops/map_box", locals: { shop: shop })
+      end
+
     end
 
   end
 
   def show
+    @hash = Gmaps4rails.build_markers(@shop) do |shop, marker|
+        marker.lat shop.latitude
+        marker.lng shop.longitude
+        marker.infowindow render_to_string(partial: "/shops/map_box", locals: { shop: shop })
+    end
   end
 
   def new

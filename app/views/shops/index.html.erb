@@ -1,18 +1,34 @@
 <h1>Tous les shops</h1>
-<%= link_to 'Ajouter un shop', new_shop_path %>
+<div class="padded">
+  <div class="row">
 
-<% @shops.each do |shop| %>
-  <%# shop.name %>
-<% end %>
+    <div class="col-xs-6">
+      <% @shops.each do |shop| %>
+        <div class="product">
+        <div class='product-body'>
+          <h3><%= shop.name %></h3>
+          <p>Best job offers on your phone</p>
+        </div>
+        <ul class="list-inline product-controls hidden-sm hidden-xs">
+          <li><%= link_to shop_path(shop) do %>
+            <i class="fa fa-eye"></i>
+          <% end %></li>
+          <li><%= link_to edit_shop_path(shop) do %>
+            <i class="fa fa-pencil"></i>
+          <% end %></li>
+          <li><%= link_to shop_path(shop), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-trash-o"></i>
+          <% end %></li>
+        </ul>
+      </div>
+      <% end %>
+    </div>
 
+     <div class="col-xs-6">
+      <div id="map" style="width: 100%; height: 100vh;" data-markers="<%= @markers.to_json %>"></div>
+    </div>
 
-<div
-  id="map"
-  style="width: 100%;
-  height: 600px;"
-  data-markers="<%= @markers.to_json %>"
-></div>
-
+  </div>
+</div>
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -26,6 +42,9 @@
       } else if (markers.length == 1) {
         handler.getMap().setZoom(14);
       }
+      else {
+      handler.getMap().setZoom(12);
+    }
     });
   <% end %>
 <% end %>
