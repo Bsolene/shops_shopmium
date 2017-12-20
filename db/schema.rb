@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20171219153702) do
   create_table "shops", force: :cascade do |t|
     t.string "chain"
     t.string "name"
-    t.decimal "latitude", precision: 16, scale: 14
-    t.decimal "longitude", precision: 17, scale: 14
+    t.float "latitude"
+    t.float "longitude"
     t.string "address"
     t.string "city"
     t.string "zip"

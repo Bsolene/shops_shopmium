@@ -6,12 +6,10 @@ class ShopsController < ApplicationController
   def index
     @shops = Shop.where.not(latitude: nil, longitude: nil)
 
-    @markers = @shops.map do |shop|
-      {
-        lat: shop.latitude,
-        lng: shop.longitude,
-        infoWindow: { content: render_to_string(partial: "/shops/map_box", locals: { shop: shop }) }
-      }
+    @hash = Gmaps4rails.build_markers(@shops) do |shop, marker|
+        marker.lat shop.latitude
+        marker.lng shop.longitude
+        marker.infowindow render_to_string(partial: "/shops/map_box", locals: { shop: shop })
     end
 
   end
@@ -37,8 +35,11 @@ class ShopsController < ApplicationController
   end
 
   def update
-    @shop.update(shop_params)
-    redirect_to shop_path(@shop)
+    if @shop.update(shop_params)
+      redirect_to shop_path(@shop)
+    else
+      render :edit
+    end
   end
 
   def destroy

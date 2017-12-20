@@ -1,6 +1,8 @@
 <h1>Tous les shops</h1>
+<%= link_to 'Ajouter un shop', new_shop_path %>
+
 <% @shops.each do |shop| %>
-  <%= shop.name %>
+  <%# shop.name %>
 <% end %>
 
 
@@ -12,3 +14,18 @@
 ></div>
 
 
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var handler = Gmaps.build('Google');
+    handler.buildMap({ internal: { id: 'map' } }, function() {
+      markers = handler.addMarkers(<%= raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      if (markers.length == 0) {
+        handler.getMap().setZoom(2);
+      } else if (markers.length == 1) {
+        handler.getMap().setZoom(14);
+      }
+    });
+  <% end %>
+<% end %>

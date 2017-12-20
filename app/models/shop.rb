@@ -4,6 +4,10 @@ class Shop < ApplicationRecord
   validates :longitude, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }
   validates :phone, format: { with: /(\(\+33\)|0|\+33|0033)[1-9]([0-9]{8}|([0-9\- ]){12})/ }
 
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  geocoded_by :full_address
+  after_validation :geocode, if: :address_changed?
+
+  def full_address
+    [address, city,].compact.join(', ')
+  end
 end
