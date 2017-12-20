@@ -13,7 +13,6 @@ task :import => [:environment] do
       zip: row[6],
       phone: row[8],
       country_code: row[18])
-
     if row[0].nil?
       p "--- Chain is blank line #{i + 2} in csv file, please add chain"
       p "#{shop.name} - #{shop.address} - #{shop.city} - #{shop.zip}"
@@ -22,14 +21,6 @@ task :import => [:environment] do
       p "--- Name is blank line #{i + 2} in csv file, please add name"
       p "#{shop.chain} - #{shop.address} - #{shop.city} - #{shop.zip}"
       shop.name = STDIN.gets.chomp
-    elsif row[2].nil?
-      p "--- Latitude is blank line #{i + 2} in csv file, please add latitude"
-      p "#{shop.name} - #{shop.address} - #{shop.city} - #{shop.zip}"
-      shop.latitude = STDIN.gets.chomp
-    elsif row[3].nil?
-      p "--- Longitude is blank line #{i + 2} in csv file, please add longitude"
-      p "#{shop.name} - #{shop.address} - #{shop.city} - #{shop.zip}"
-      shop.longitude = STDIN.gets.chomp
     elsif row[4].nil?
       p "--- Address is blank line #{i + 2} in csv file, please add address"
       p "#{shop.name} - #{shop.city} - #{shop.zip}"

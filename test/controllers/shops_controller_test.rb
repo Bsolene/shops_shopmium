@@ -17,11 +17,12 @@ class ShopsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+
   test "should create shop" do
     assert_difference('Shop.count') do
       post shops_url, params: { shop: { chain: @shop.chain, name: @shop.name, address: @shop.address, city: @shop.city } }
     end
-    assert_redirected_to shop_path(Shop.last)
+    assert_redirected_to shop_url(Shop.last)
   end
 
   test "should show shop" do
