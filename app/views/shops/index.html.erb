@@ -1,50 +1,30 @@
 <h1>Tous les shops</h1>
+
+
+<%= form_tag shops_path, method: :get do %>
+  <input type="hidden" name="location" value="">
+  <%= label :distance, "Distance : " %>
+  <%= text_field_tag :distance, params[:distance] %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <div class="padded">
   <div class="row">
 
     <div class="col-xs-6">
-      <% @shops.each do |shop| %>
-        <div class="product">
-        <div class='product-body'>
-          <h3><%= shop.name %></h3>
-          <p>Best job offers on your phone</p>
-        </div>
-        <ul class="list-inline product-controls hidden-sm hidden-xs">
-          <li><%= link_to shop_path(shop) do %>
-            <i class="fa fa-eye"></i>
-          <% end %></li>
-          <li><%= link_to edit_shop_path(shop) do %>
-            <i class="fa fa-pencil"></i>
-          <% end %></li>
-          <li><%= link_to shop_path(shop), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-trash-o"></i>
-          <% end %></li>
-        </ul>
+      <div id="shops">
+        <%= render 'shops', shops: @shops %>
       </div>
-      <% end %>
     </div>
 
      <div class="col-xs-6">
-      <div id="map" style="width: 100%; height: 100vh;" data-markers="<%= @markers.to_json %>"></div>
+      <div id="map_google">
+        <%= render 'map', markers: @markers %>
+      </div>
+
     </div>
 
   </div>
 </div>
 
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: { id: 'map' } }, function() {
-      markers = handler.addMarkers(<%= raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-      if (markers.length == 0) {
-        handler.getMap().setZoom(2);
-      } else if (markers.length == 1) {
-        handler.getMap().setZoom(14);
-      }
-      else {
-      handler.getMap().setZoom(12);
-    }
-    });
-  <% end %>
-<% end %>
+

@@ -1,0 +1,6 @@
+$(document).ready(function(){
+
+  $('#shops').html("<%= escape_javascript(render("shops")) %>")
+  $('#map_google').html("<%= escape_javascript(render("map")) %>")
+
+});
