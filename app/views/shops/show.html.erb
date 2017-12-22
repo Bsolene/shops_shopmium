@@ -5,24 +5,34 @@
   data-markers="<%= @markers.to_json %>"
 ></div>
 
-<h3> <%= @shop.name %> </h3>
+<div class="flex title">
+  <div class="name"><%= @shop.name %></div>
+  <div class="link">
+    <%= link_to edit_shop_path(@shop) do %>
+      <i class="fa fa-pencil"></i>
+    <% end %>
+    <%= link_to shop_path(@shop), method: :delete do %>
+      <i class="fa fa-trash-o"></i>
+    <% end %>
+  </div>
+</div>
 
-<%= link_to edit_shop_path(@shop) do %>
-  <i class="fa fa-pencil"></i>
-<% end %>
-<%= link_to shop_path(@shop), method: :delete do %>
-  <i class="fa fa-trash-o"></i>
-<% end %>
-
-
-<%= @shop.chain %>
-<%= @shop.full_address %>
-<%= @shop.zip %>
-<%= @shop.phone %>
+<div class="flex-vertical infos">
+  <div class="chain"><%= @shop.chain.capitalize %></div>
+  <div>
+    <i class="fa fa-map-marker"></i>
+    <%= @shop.full_address %> -
+    <%= @shop.zip %>
+  </div>
+  <div>
+    <i class="fa fa-phone"></i>
+    <%= @shop.phone %>
+  </div>
+</div>
 
 
 <% content_for(:after_js) do %>
-  <%= javascript_tag do %>
+  <script>
     var handler = Gmaps.build('Google');
     handler.buildMap({ internal: { id: 'map' } }, function() {
       markers = handler.addMarkers(<%= raw @hash.to_json %>);
@@ -34,5 +44,5 @@
         handler.getMap().setZoom(14);
       }
     });
-  <% end %>
+  </script>
 <% end %>
