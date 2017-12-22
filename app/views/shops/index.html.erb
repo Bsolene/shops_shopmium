@@ -1,10 +1,10 @@
 <h1>Tous les shops</h1>
 
-
-<%= form_tag shops_path, method: :get do %>
-  <input type="hidden" name="location" value="">
+<%= form_tag(shops_path, method: :get, id: "distanceform" ) do %>
+  <input id="hidden" type="hidden" name="location" value="" >
   <%= label :distance, "Distance : " %>
-  <%= text_field_tag :distance, params[:distance] %>
+  <input id="ex1" data-slider-id='ex1Slider' name="distance" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value= "" />
+
   <%= submit_tag "Search" %>
 <% end %>
 
@@ -27,4 +27,20 @@
   </div>
 </div>
 
+<%= content_for(:after_js) do %>
+  <script>
+    <% if params[:distance] %>
+      var distanceValue = <%= raw params[:distance] %>
+    <% else %>
+      var distanceValue = 10
+    <% end %>
 
+    var mySlider = new Slider('#ex1', {
+      value: distanceValue,
+      formatter: function(value) {
+        return value * 100 + ' mètres';
+      }
+    });
+
+  </script>
+<% end %>

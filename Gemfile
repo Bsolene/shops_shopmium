@@ -37,3 +37,5 @@ group :development, :test do
   gem 'rails-controller-testing'
 
 end
+
+gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
