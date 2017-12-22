@@ -2,7 +2,7 @@
   <div class="product">
   <div class='product-body'>
     <h3><%= shop.name %></h3>
-    <p>Best job offers on your phone</p>
+    <p><%= shop.city %></p>
   </div>
   <ul class="list-inline product-controls hidden-sm hidden-xs">
     <li><%= link_to shop_path(shop) do %>
@@ -11,7 +11,7 @@
     <li><%= link_to edit_shop_path(shop) do %>
       <i class="fa fa-pencil"></i>
     <% end %></li>
-    <li><%= link_to shop_path(shop), method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-trash-o"></i>
+    <li><%= link_to shop_path(shop), method: :delete do %><i class="fa fa-trash-o"></i>
     <% end %></li>
   </ul>
 </div>

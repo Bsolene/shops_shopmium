@@ -9,11 +9,34 @@
 .padded{
   padding: 0px 40px;
 }
-
+.flex{
+  display: flex;
+  justify-content: center;
+}
 #shops{
   height: 70vh;
   overflow: scroll;
 }
 #ex1Slider .slider-selection {
   background: #BABABA;
+}
+.search-form{
+  margin: 20px;
+  span {
+    margin: 0px 15px;
+  }
+  #location {
+    line-height: 25px;
+    font-weight: lighter;
+    color: rgba(105,105,105,0.5);
+    background-color: white;
+    border: 1px solid rgba(243,243,243,0.1);
+    border-radius: 5px;
+    margin: 0px 10px;
+    font-size: 14px;
+    outline: none;
+  }
+  #location:focus  {
+    border: 1px solid rgba(105,105,105,0.5);
+  }
 }

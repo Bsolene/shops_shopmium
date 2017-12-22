@@ -1,12 +1,15 @@
-<h1>Tous les shops</h1>
+<!-- <h1>Tous les shops</h1> -->
+<div class="flex">
+  <div class="search-form">
+    <%= form_tag(shops_path, method: :get, id: "distanceform" ) do %>
+      <input id="hidden" type="hidden" name="location" value="" >
+      <%= label :distance, "Distance : " %>
+      <span>0</span><input id="ex1" data-slider-id='ex1Slider' name="distance" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value= "" /><span>1000 mètres</span>
 
-<%= form_tag(shops_path, method: :get, id: "distanceform" ) do %>
-  <input id="hidden" type="hidden" name="location" value="" >
-  <%= label :distance, "Distance : " %>
-  <input id="ex1" data-slider-id='ex1Slider' name="distance" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value= "" />
-
-  <%= submit_tag "Search" %>
-<% end %>
+      <%= submit_tag "Search", class: "btn-gray" %>
+    <% end %>
+  </div>
+</div>
 
 <div class="padded">
   <div class="row">
@@ -30,15 +33,16 @@
 <%= content_for(:after_js) do %>
   <script>
     <% if params[:distance] %>
-      var distanceValue = <%= raw params[:distance] %>
+      const distanceValue = <%= raw params[:distance] %>
     <% else %>
-      var distanceValue = 10
+      const distanceValue = 0
     <% end %>
 
-    var mySlider = new Slider('#ex1', {
+    const mySlider = new Slider('#ex1', {
       value: distanceValue,
+      tooltip: 'always',
       formatter: function(value) {
-        return value * 100 + ' mètres';
+        return value * 100;
       }
     });
 
